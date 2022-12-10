@@ -1,6 +1,6 @@
 ---
-title: "Your A4 Report Title (TODO: Revise title)"
-author: "Your Name"
+title: "Incarceration trends analysis in the US"
+author: "Patricia Ma"
 date: '2022-11-01'
 output: html_document
 ---
@@ -11,35 +11,52 @@ source("../source/analysis.R")
 ```
 
 ## Abstract 
-[TODO: Include a short abstract (about 50 words)]
-
-# Test (TODO: Remove before submission!!)
-```{r echo=FALSE}
-q1_string <- test_query1()
-num <- 5
-```
-As you know, this is a markdown report. The [R Markdown Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) is **useful!**
-
-* Here's a test of a dynamic variable. Say **"`r q1_string`!!!** 
-* Here's another test. A vector
-of numbers: `r test_query2(num)`.
-
-Recall that _{r echo=TRUE}_ can be used to display the code, 
-which is very useful when developing and debugging a report. Here's an example: 
-
-```{r echo=TRUE}
-num <- 5
-sum <- sum(test_query2(num))
-print(sum)
-```
+This analysis is based on the data collected by the Vera Institute, and shows readers the overall incarceration trend in America since the 1970s, including the national jail population growth, incarceration comparison by states, and graphs that shows the inequality in America's prison system. 
 
 ## Introduction 
-[TODO]
+The justice system in America has been criticized and ridiculed by many. According to studies, black people are 5 time more likely to get arrested in America compared to white people, and this causes issues like single motherhood, low education level within the black communities, more crimes and a vicious cycle that repeats all of these problems. 
+
+This report used the incarceration trend data set from the Vera Institute. The direct stakeholders by research into this dataset are the college students who have become more familiar with the injustice that exists in the prison system, and the readers of this report who also learn about these issues. The indirect stakeholders are those minorities who were arrested due to minor offense and police oversensitivity, and those who might not be able to speak for themselves. 
+
+In this report, data visualizations were used to help readers understand the general incarceration population growth in the last several decades in the nation, the different situations and incarceration population in each state, and how the trends compare between white people and the minorities. 
+
 
 ## Data Summary 
-[TODO]
 
-[TODO ... other sections ... See Canvas for details]
+```{r echo=FALSE, eval=TRUE, message=FALSE, include=FALSE}
+source("../source/a4-helpers.R")
+source("../source/analysis.R")
+```
 
-_All the very best with your work!_
+```{r echo=FALSE, eval=TRUE, message=FALSE,}
+```
 
+In this section, I decided to look at the average state incarceration population of black and white prisoners, the states that hold the most black and white prisoners, and how the state average population of black prisoners has changed since 2008. 
+
+Despite the large total population difference, the disparity between the state average number of black and white prisoners is not that far apart. In 2018, the average state population for black prisoners is `r average_black_in_each_state_2018`, while for white prisoners, the number is only `r average_white_in_each_state_2018`, the difference is less than 2000, while there are about 5 times more white people than black people. If we look at the maximum number of prisoners, `state_most_black_prisoners`in 2018 had the most black prisoners in the country with `r state_most_black_prisoners_count` people. On the other hand,  `r state_most_white_prisoners` has the most white prisoners in the country with `r state_most_white_prisoners_count` people, again the difference is small considering the overall population difference. In 2008, there were on average 
+`r state_black_avg_2008` black prisoners in each state, and in 2018, that number decreased to `r state_black_avg_2018` which is good news. 
+
+## Growth of the U.S. Prison Population
+
+```{r echo=FALSE}
+plot_jail_pop_for_us()
+```
+
+In the chart, we see a drastic increase of jail population in the US starting from 
+year 1980 to around 2008. The number went from under 200,000 in the 1970s to almost 
+800,000 3 decades later. There has been a slight decrease in the jail population from 2008 to 2018, however, the number is still very high and concerning. My question is: how did the jail population vary after the 2020 BLM movement? Was there an increase or decrease in the overall jail population? 
+
+## Growth of Prison Population by State 
+
+```{r echo=FALSE}
+plot_jail_pop_for_us(c("WA", "OR", "CA"))
+```
+
+In this chart, we see the comparison of the total jail population in WA, OR, and CA state. The incarcerated population in California is roughly 5 times more than the other 2 states. From 1970, the jail population in WA and OR has only increased slowly, while the graph showed a dramatic increase in California's jail population from the late 70s to the 90s. My question is that what events caused the increase in California? 
+
+## Patterns of inequality 
+```{r echo=FALSE}
+plot_minority_pop()
+```
+
+In this chart, we can see that no specific racial data was collected for white and black people until the mid 1980s. The blue line indicates the trend for black people and the red line indicates the trend for white people. We can see that up until the 2000s, the lines almost overlapped, meaning that there were about the same amount of incarcerated white people and black people despite the large population difference. My question is that what caused the incarcerated black population to go down in around 2007?
